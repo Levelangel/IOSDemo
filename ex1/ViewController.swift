@@ -20,6 +20,16 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func touch(_ sender: UIButton) {
+        
+        let ac = UIAlertController(title: "Message", message: "You press the button!", preferredStyle: .alert)
+        
+        let btnOK = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        ac.addAction(btnOK)
+        
+        self.present(ac, animated: true, completion: nil)
+    }
+    
 }
 
