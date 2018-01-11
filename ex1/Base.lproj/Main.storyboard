@@ -17,89 +17,9 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zKc-QV-ECL" userLabel="View Title">
-                                <rect key="frame" x="20" y="100" width="374" height="586"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="汤姆米切尔提出的机器学习的定义" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mj5-tV-Pb8">
-                                        <rect key="frame" x="20" y="200" width="334" height="71.666666666666686"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <color key="textColor" red="0.36862745099999999" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="Mj5-tV-Pb8" firstAttribute="top" secondItem="zKc-QV-ECL" secondAttribute="top" constant="200" id="9sI-N2-SqJ"/>
-                                    <constraint firstItem="Mj5-tV-Pb8" firstAttribute="centerX" secondItem="zKc-QV-ECL" secondAttribute="centerX" id="fRo-gn-iAe"/>
-                                    <constraint firstItem="Mj5-tV-Pb8" firstAttribute="width" secondItem="zKc-QV-ECL" secondAttribute="width" constant="-40" id="thC-wR-xcc"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aXL-MN-uvk" userLabel="View Content">
-                                <rect key="frame" x="20" y="70" width="374" height="586"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="汤姆米切尔提出的机器学习的定义" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esr-b9-pE8">
-                                        <rect key="frame" x="20" y="30.000000000000004" width="334" height="57.333333333333343"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <color key="textColor" red="0.36862745099999999" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="VgO-gb-BbQ">
-                                        <rect key="frame" x="0.0" y="548" width="374" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4z-56-ICF">
-                                                <rect key="frame" x="0.0" y="0.0" width="282" height="30"/>
-                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
-                                                <state key="normal" title="知道">
-                                                    <color key="titleColor" red="0.36862745099999999" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GdY-4p-uas">
-                                                <rect key="frame" x="282" y="0.0" width="46" height="30"/>
-                                                <state key="normal" title="不确定">
-                                                    <color key="titleColor" red="0.36862745099999999" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23S-wk-0rP">
-                                                <rect key="frame" x="328" y="0.0" width="46" height="30"/>
-                                                <state key="normal" title="不知道">
-                                                    <color key="titleColor" red="0.36862745099999999" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="Esr-b9-pE8" firstAttribute="centerX" secondItem="aXL-MN-uvk" secondAttribute="centerX" id="ds1-7E-hP2"/>
-                                    <constraint firstItem="Esr-b9-pE8" firstAttribute="width" secondItem="aXL-MN-uvk" secondAttribute="width" constant="-40" id="msY-vs-Alc"/>
-                                    <constraint firstItem="Esr-b9-pE8" firstAttribute="top" secondItem="aXL-MN-uvk" secondAttribute="top" constant="30" id="qgC-bz-iPg"/>
-                                    <constraint firstItem="VgO-gb-BbQ" firstAttribute="centerX" secondItem="aXL-MN-uvk" secondAttribute="centerX" id="tOq-o5-JDO"/>
-                                    <constraint firstItem="VgO-gb-BbQ" firstAttribute="width" secondItem="aXL-MN-uvk" secondAttribute="width" id="vhd-RW-XyJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="VgO-gb-BbQ" secondAttribute="bottom" constant="8" id="zBU-tA-FO8"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="zKc-QV-ECL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="3h2-yF-4wT"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zKc-QV-ECL" secondAttribute="trailing" constant="20" id="EwA-gG-vag"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zKc-QV-ECL" secondAttribute="bottom" constant="50" id="F5a-rs-YSx"/>
-                            <constraint firstItem="aXL-MN-uvk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="HmU-mG-0AM"/>
-                            <constraint firstItem="zKc-QV-ECL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="OKu-Zo-wKb"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aXL-MN-uvk" secondAttribute="bottom" constant="80" id="Onc-Gz-imO"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aXL-MN-uvk" secondAttribute="trailing" constant="20" id="hWE-Mj-O4D"/>
-                            <constraint firstItem="aXL-MN-uvk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="uKE-wJ-FP3"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <connections>
-                        <outlet property="btnKnow" destination="L4z-56-ICF" id="VHr-oy-gvg"/>
-                        <outlet property="btnNotKnow" destination="23S-wk-0rP" id="I2c-aj-qFI"/>
-                        <outlet property="btnNotShre" destination="GdY-4p-uas" id="EPq-5C-xlv"/>
-                        <outlet property="viewContent" destination="aXL-MN-uvk" id="EM0-KC-cky"/>
-                        <outlet property="viewTitle" destination="zKc-QV-ECL" id="iPo-un-Q8h"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
