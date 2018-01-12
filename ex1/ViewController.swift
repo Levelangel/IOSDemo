@@ -167,11 +167,17 @@ class ViewController: UIViewController {
         
         let transition:CGPoint = sender.translation(in: viewContent)
         checkLock(transition)
+        
+        if isLock {
+            
+        }
     }
     
     func checkLock(_ transition : CGPoint){
         if(abs(transition.x) > 1 || abs(transition.y) > 1){
             isLock = true
+        } else {
+            isLock = false
         }
     }
     
