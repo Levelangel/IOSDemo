@@ -40,6 +40,13 @@ class ViewController: UIViewController {
 
     var isFront : Bool = true
     var isLock : Bool = false
+    var isUp : Bool = false
+    var isLeft : Bool = false
+    var isRight : Bool = false
+    
+    var animationFront : UIViewPropertyAnimator!
+    var animationBack : UIViewPropertyAnimator!
+    var animationUp : UIViewPropertyAnimator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,19 +56,27 @@ class ViewController: UIViewController {
         
         self.view.backgroundColor = UIColor(red: 0xF8/255, green: 0xF9/255, blue: 0xFA/255, alpha: 1.0)
         
-        viewContent = initSubview()
+        viewContent = initContentSubview()
+        viewFront = initFrontSubview()
         labelFront = initFrontLabel()
         labelBack = initBackLabel()
         btnKnow = initBtnKnow()
         btnNotKnow = initBtnNotKnow()
         btnNotSure = initBtnNotSure()
-        viewContent.addSubview(labelFront)
+        viewContent.addSubview(labelBack)
+        viewContent.addSubview(btnKnow)
+        viewContent.addSubview(btnNotKnow)
+        viewContent.addSubview(btnNotSure)
+        viewContent.layer.transform = CATransform3DMakeRotation(CGFloat(.pi*(3.5)), 0, -1, 0)
+        viewFront.addSubview(labelFront)
+        viewContent.isHidden = true
         self.view.addSubview(viewContent)
+        self.view.addSubview(viewFront)
         
-        
+        aniInit()
     }
     
-    func initSubview() -> UIView {
+    func initSubview() -> UIView{
         let subview = UIView(frame: CGRect(x: MARGIN_LEFT_AND_RIGHT, y: MARGIN_TOP, width: SCREEN_WIDTH-MARGIN_LEFT_AND_RIGHT*2-2, height: SCREEN_HEIGHT-MARGIN_TOP-MARGIN_BOTTOM-2))
         subview.layer.borderColor = CHILD_VIEW_BORDER_COLOR.cgColor
         subview.layer.borderWidth = 0.5
@@ -70,8 +85,20 @@ class ViewController: UIViewController {
         subview.layer.shadowColor = UIColor(red: 0xE6/255, green: 0xE6/255, blue: 0xE6/255, alpha: 1.0).cgColor
         subview.layer.shadowOffset = CGSize(width:6,height:6)
         subview.layer.shadowOpacity = 0.4
+        subview.clipsToBounds = true
         subview.isUserInteractionEnabled = true
+        return subview
+    }
+    
+    func initFrontSubview() -> UIView {
+        let subview = initSubview()
         subview.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tagGesture)))
+        return subview
+    }
+    
+    func initContentSubview() -> UIView{
+        let subview = initSubview()
+
         subview.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(tagDrag)))
         return subview
     }
@@ -106,8 +133,12 @@ class ViewController: UIViewController {
         button.setTitleColor(BUTTON_TITLE_COLOR, for: .normal)
         button.layer.borderWidth = 0.5
         button.layer.borderColor = CHILD_VIEW_BORDER_COLOR.cgColor
-        
+        button.addTarget(self, action: #selector(btnKnowClick), for: .touchUpInside)
         return button
+    }
+    
+    @objc func btnKnowClick(){
+        print("dddd")
     }
 
     func initBtnNotKnow() -> UIButton {
@@ -131,51 +162,72 @@ class ViewController: UIViewController {
         button.layer.borderColor = CHILD_VIEW_BORDER_COLOR.cgColor
         return button
     }
-    var animationFront,animationBack : UIViewPropertyAnimator!
+    
     // View点击事件
     @objc func tagGesture() {
-
-        animationFront = UIViewPropertyAnimator(duration: 0.1, curve: .easeIn, animations: {
-            self.viewContent.layer.transform = CATransform3DMakeRotation(CGFloat(.pi*0.5), 0, -1, 0)
-        })
+        
         animationFront.startAnimation()
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {_ in
-            self.viewContent.subviews.map{ $0.removeFromSuperview()}
-            if self.isFront {
-                self.viewContent.addSubview(self.labelBack)
-                self.viewContent.addSubview(self.btnKnow)
-                self.viewContent.addSubview(self.btnNotKnow)
-                self.viewContent.addSubview(self.btnNotSure)
-            } else {
-                self.viewContent.addSubview(self.labelFront)
-            }
-            self.isFront = !self.isFront
+//            self.viewContent.subviews.map{ $0.removeFromSuperview()}
+//            if self.isFront {
+            self.viewContent.isHidden = false
+            self.viewFront.isHidden = true
+            self.view.bringSubview(toFront: self.viewContent)
+////                self.viewContent.addSubview(self.labelBack)
+////                self.viewContent.addSubview(self.btnKnow)
+////                self.viewContent.addSubview(self.btnNotKnow)
+////                self.viewContent.addSubview(self.btnNotSure)
+//            } else {
+////                self.viewContent.addSubview(self.labelFront)
+//            }
+//            self.isFront = !self.isFront
             self.viewContent.layer.transform = CATransform3DMakeRotation(CGFloat(.pi*3.5), 0, -1, 0)
-            self.animationBack = UIViewPropertyAnimator(duration: 0.1, curve: .easeOut, animations: {
-                self.viewContent.layer.transform = CATransform3DMakeRotation(CGFloat(.pi*4.0), 0, -1, 0)
-            })
+            
             self.animationBack.startAnimation()
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {_ in
+                self.viewFront.layer.transform = CATransform3DMakeRotation(CGFloat(.pi*4.0), 0, -1, 0)
+                self.viewFront.isHidden = false
+            }
         }
         
     }
+    
+    
     
     //View 拖拽事件
     @objc func tagDrag(sender: UIPanGestureRecognizer) {
-        if isFront {
-            return
-        }
+//        if isFront {
+//            return
+//        }
         
         let transition:CGPoint = sender.translation(in: viewContent)
-        checkLock(transition)
+        checkLockAndDirection(transition)
+        switch sender.state {
         
-        if isLock {
-            
+        case .changed:
+            if isLock {
+                if isUp && transition.y < 0 {
+                    viewContent.transform = CGAffineTransform(translationX: 0, y: transition.y)
+                }
+            }
+                
+        case .ended:
+            break
+        default :
+            break
+        
         }
     }
     
-    func checkLock(_ transition : CGPoint){
-        if(abs(transition.x) > 1 || abs(transition.y) > 1){
+    func checkLockAndDirection(_ transition : CGPoint){
+        let x = abs(transition.x)
+        let y = abs(transition.y)
+        
+        if(x > 1 || y > 1){
             isLock = true
+            if y > x*2 {
+                isUp = true
+            }
         } else {
             isLock = false
         }
@@ -185,24 +237,17 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //初始化动画
+    func aniInit(){
+        animationFront = UIViewPropertyAnimator(duration: 0.1, curve: .easeIn, animations: {
+            self.viewFront.layer.transform = CATransform3DMakeRotation(CGFloat(.pi*0.5), 0, -1, 0)
+        })
+        
+        animationBack = UIViewPropertyAnimator(duration: 0.1, curve: .easeOut, animations: {
+            self.viewContent.layer.transform = CATransform3DMakeRotation(CGFloat(.pi*4.0), 0, -1, 0)
+        })
+    }
 
-    //    @IBAction func touch(_ sender: UIButton) {
-//
-//        let sb = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = sb.instantiateViewController(withIdentifier: "ViewController2")
-//        self.present(vc, animated: true, completion: nil)
-//    }
-    //    @IBAction func touch(_ sender: UIButton) {
-//        
-//        let ac = UIAlertController(title: "Message", message: "You press the button!", preferredStyle: .alert)
-//
-//        let btnOK = UIAlertAction(title: "OK", style: .default, handler: nil)
-//
-//        ac.addAction(btnOK)
-//
-//        self.present(ac, animated: true, completion: nil)
-//    }
-    
-    
 }
 
